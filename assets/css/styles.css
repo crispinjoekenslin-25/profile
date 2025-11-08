@@ -153,7 +153,7 @@ h3 { font-size: clamp(20px, 3vw, 26px); }
 
 .theme-toggle {
     position: fixed;
-    top: 1rem;
+    top: 1.5rem;
     right: 1rem;
     z-index: 1000;
   }
@@ -475,6 +475,18 @@ body[data-theme="light"] .theme-toggle { background: rgba(92,74,245,.12); }
     background: linear-gradient(90deg, rgba(138,99,255,0.35), rgba(0,0,0,0));
     opacity: .4;
 }
+
+#engagements-timeline a {
+    color: #0077b5;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  #engagements-timeline a:hover {
+    text-decoration: underline;
+  }
+
+  
 .section-media.has-image::before {
     content: "";
     position: absolute;

@@ -276,6 +276,8 @@ const setImage = (id, media, fallbackAlt = '') => {
 		toggleSectionVisibility(researchEl, Array.isArray(data.research) && data.research.length);
 	}
 
+	
+
 	const projectsEl = document.getElementById('projects-grid');
 	if (projectsEl) {
 	setImage('projects-media', data.media?.projects, 'Projects showcase');
@@ -386,6 +388,7 @@ const setImage = (id, media, fallbackAlt = '') => {
 		}
 		toggleSectionVisibility(engagementsEl, Array.isArray(data.engagements) && data.engagements.length);
 	}
+	
 
 	const skillsEl = document.getElementById('skills-groups');
 	if (skillsEl) {

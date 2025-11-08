@@ -56,7 +56,7 @@ window.SITE_CONTENT = {
 		institution: "Sacred Heart Convent Anglo Indian Higher Secondary School",
 		period: "2009 – 2022",
 		details:
-		  "Subject topper in Class 12 Biology Board exams with multiple academic achievements."
+		  "Subject topper in Class 12 Biology Board exam with multiple academic achievements."
 	  }
 	],
   
@@ -143,57 +143,59 @@ window.SITE_CONTENT = {
 	],
   
 	engagements: [
-	  {
-		role: "Interactive Session - Dr. Sudhagar Pitchaimuthu - What after Biotech UG?",
-		organization: "Heriot-Watt University, Switzerland",
-		year: "2025"
-	  },
-	  {
-		role: "Guest Lecture - Dr. Sowbarnika Loganathan - Expectations of industries from candidates and decoding how to fulfill the same",
-		organization: "Asst. Team Lead (Admin), Molecular Connections Pvt. Ltd.",
-		year: "2025"
-	  },
-	  {
-		role: "Guest Lecture - Dr. Azhaguvel Perumal - General Perspective on Trait Development and Commercialization in Seed Industry",
-		organization: "Tamil Nadu Agricultural University (TNAU)",
-		year: "2025"
-	  },
-	  {
-		role: "Guest Lecture - Dr. Kesavan Markkandan - Biotechnology for Sustainable Development: Industrial Insights and Emerging Trends",
-		organization: "CEO, Oneomics Pvt. Ltd., Trichy",
-		year: "2025"
-	  },
-	  {
-		role: "Workshop - Agri-Tech Start-Ups Business Meet 2025",
-		organization: "COXBIT, TNAU",
-		year: "2025"
-	  },
-	  {
-		role: "Guest Lecture - Dr. Vivek Chandramohan - Career Opportunities in Omics Data Analysis",
-		organization: "CEO and Founder, Insilicomics Research Pvt. Ltd., Ooty",
-		year: "2025"
-	  },
-	  {
-		role: "Guest Session - Dr. Ajay Kohli",
-		organization: "International Rice Research Institute (IRRI)",
-		year: "2025"
-	  },
-	  {
-		role: "Guest Lecture - Dr. Jagadeesh Selvam - Molecular Breeding and Genotyping in the Seed Industry",
-		organization: "Scientist, Rasi Seeds Pvt. Ltd., Salem",
-		year: "2025"
-	  },
-	  {
-		role: "Guest Lecture - Dr. Sumanth Mutte - Plant Genomics in the Era of Big Data and Artificial Intelligence",
-		organization: "MyGenInformatics – India & Netherlands",
-		year: "2025"
-	  },
-	  {
-		role: "Guest Lecture - Dr. Preethi Marimuthu - Carbon Capture and Fixation: Biotech Solutions for Agriculture and Climate Change",
-		organization: "R&D Director, Marisym Biologicals Pvt. Ltd., Coimbatore",
-		year: "2025"
-	  }
-	],
+		{
+		  role: 'Interactive Session - Dr. Sudhagar Pitchaimuthu - What after Biotech UG? ',
+		  organization: "Heriot-Watt University, Switzerland",
+		  year: "2025"
+		},
+		{
+		  role: 'Guest Lecture - Dr. Sowbarnika Loganathan - Expectations of industries from candidates and decoding how to fulfill the same <a href="https://www.linkedin.com/posts/tamil-nadu-agricultural-university_tnau-activity-7367549905906651136-nsVH?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFAHdq4B6kEqNwlUCyPXrOQJ-9qjQqRpv6E" target="_blank">(LinkedIn)</a>',
+		  organization: "Asst. Team Lead (Admin), Molecular Connections Pvt. Ltd.",
+		  year: "2025"
+		},
+		{
+		  role: 'Guest Lecture - Dr. Azhaguvel Perumal - General Perspective on Trait Development and Commercialization in Seed Industry <a href="https://www.linkedin.com/posts/tamil-nadu-agricultural-university_tnau-tnau-cpmb-activity-7362432980201459712-bdZZ?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFAHdq4B6kEqNwlUCyPXrOQJ-9qjQqRpv6E" target="_blank">(LinkedIn)</a>',
+		  organization: "Tamil Nadu Agricultural University (TNAU)",
+		  year: "2025"
+		},
+		{
+		  role: 'Guest Lecture - Dr. Kesavan Markkandan - Biotechnology for Sustainable Development: Industrial Insights and Emerging Trends',
+		  organization: "CEO, Oneomics Pvt. Ltd., Trichy",
+		  year: "2025"
+		},
+		{
+		  role: 'Workshop - Agri-Tech Start-Ups Business Meet 2025',
+		  organization: "COXBIT, TNAU",
+		  year: "2025"
+		},
+		{
+		  role: 'Guest Lecture - Dr. Vivek Chandramohan - Career Opportunities in Omics Data Analysis',
+		  organization: "CEO and Founder, Insilicomics Research Pvt. Ltd., Ooty",
+		  year: "2025"
+		},
+		{
+		  role: 'Guest Session - Dr. Ajay Kohli ',
+		  organization: "International Rice Research Institute (IRRI)",
+		  year: "2025"
+		},
+		{
+		  role: 'Guest Lecture - Dr. Jagadeesh Selvam - Molecular Breeding and Genotyping in the Seed Industry',
+		  organization: "Scientist, Rasi Seeds Pvt. Ltd., Salem",
+		  year: "2025"
+		},
+		{
+		  role: 'Guest Lecture - Dr. Sumanth Mutte - Plant Genomics in the Era of Big Data and Artificial Intelligence',
+		  organization: "MyGenInformatics – India & Netherlands",
+		  year: "2025"
+		},
+		{
+		  role: 'Guest Lecture - Dr. Preethi Marimuthu - Carbon Capture and Fixation: Biotech Solutions for Agriculture and Climate Change <a href="https://www.linkedin.com/posts/activity-7390294408665018368-0SCv?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFAHdq4B6kEqNwlUCyPXrOQJ-9qjQqRpv6E" target="_blank">(LinkedIn)</a>',
+		  organization: "R&D Director, Marisym Biologicals Pvt. Ltd., Coimbatore",
+		  year: "2025"
+		}
+	  ]
+	  
+	  ,
   
 	skills: [
 	  {
