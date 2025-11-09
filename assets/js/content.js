@@ -102,7 +102,7 @@ window.SITE_CONTENT = {
 		]
 	  },
 	  {
-		title: "Tumor Prediction Model",
+		title: "Hydrophobicity Plotter (Multi window)",
 		description:
 		  "Python command-line tool designed to calculate and visualize the hydrophobicity of protein sequences using the Kyte-Doolittle hydropathy scale.",
 		meta: ["Role: Developer", "Tech: Python, Matplotlib"],
@@ -111,7 +111,7 @@ window.SITE_CONTENT = {
 		]
 	  },
 	  {
-		title: "Hydrophobicity Plotter (Multi window)",
+		title: "Tumor PredictionModel",
 		description:
 		  "Random forest model predicting tumor presence from gene expression data, packaged for first-time ML practitioners.",
 		meta: ["Role: Developer", "Tech: Python, scikit-learn"],
