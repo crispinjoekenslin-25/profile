@@ -67,20 +67,20 @@ window.SITE_CONTENT = {
 		summary:
 		  "Performed molecular docking of multiple SARS-CoV-2 targets against phytochemicals from Oenothera biennis and executed molecular dynamics simulation on top hits.",
 		tags: ["Molecular Docking", "Molecular Dynamics", "ADMET Analysis"],
-		links: [
+		/*links: [
 		  { label: "PDF", url: "#" },
 		  { label: "Code", url: "#" }
-		]
+		]*/
 	  },
 	  {
 		title: "Clustrix Pro - Interactive clustering and visualization web app",
 		summary:
 		  "Developed an R Shiny app offering multiple clustering algorithms, publication-ready plots, and narrative reports with actionable insights.",
 		tags: ["R", "Shiny"],
-		links: [
+		/*links: [
 		  { label: "Poster", url: "#" },
 		  { label: "Code", url: "#" }
-		]
+		]*/
 	  }
 	],
   

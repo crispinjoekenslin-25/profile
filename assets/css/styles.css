@@ -78,6 +78,15 @@ h3 { font-size: clamp(20px, 3vw, 26px); }
     padding: 0 var(--space-4);
 }
 
+@media (max-width: 600px) {
+  #resume-buttons a {
+    display: block;
+    margin: 0.4rem auto;
+    width: 80%;
+  }
+}
+
+
 .skip-link {
     position: absolute;
     left: -9999px;
