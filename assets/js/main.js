@@ -1,13 +1,22 @@
 (function () {
+	'use strict';
+
 	const body = document.body;
 	const navToggle = document.querySelector('.nav-toggle');
 	const siteNav = document.getElementById('site-nav');
+	const header = document.querySelector('.site-header');
+	const yearEl = document.getElementById('year');
+	const themeToggle = document.getElementById('theme-toggle');
+
+	// ===== Mobile Navigation Toggle =====
 	if (navToggle && siteNav) {
 		navToggle.addEventListener('click', () => {
 			const expanded = navToggle.getAttribute('aria-expanded') === 'true';
 			navToggle.setAttribute('aria-expanded', String(!expanded));
 			siteNav.classList.toggle('open');
 		});
+
+		// Close mobile nav when clicking a link
 		siteNav.addEventListener('click', (e) => {
 			const target = e.target;
 			if (target && target.tagName === 'A') {
@@ -17,7 +26,7 @@
 		});
 	}
 
-	const header = document.querySelector('.site-header');
+	// ===== Smooth Scroll with Offset =====
 	function offsetScrollIntoView(hash) {
 		const el = document.querySelector(hash);
 		if (!el) return;
@@ -25,6 +34,7 @@
 		const y = el.getBoundingClientRect().top + window.pageYOffset - headerHeight;
 		window.scrollTo({ top: y, behavior: 'smooth' });
 	}
+
 	document.addEventListener('click', (e) => {
 		const a = e.target.closest('a[href^="#"]');
 		if (!a) return;
@@ -35,23 +45,32 @@
 		}
 	});
 
-	const yearEl = document.getElementById('year');
+	// ===== Update Footer Year =====
 	if (yearEl) {
 		yearEl.textContent = String(new Date().getFullYear());
 	}
 
-	// Theme toggle
-	const themeToggle = document.getElementById('theme-toggle');
+	// ===== Theme Toggle =====
 	const THEME_KEY = 'site-theme';
 	const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+	
 	const safeLocalStorage = {
 		get(key) {
-			try { return window.localStorage.getItem(key); } catch (err) { return null; }
+			try {
+				return window.localStorage.getItem(key);
+			} catch (err) {
+				return null;
+			}
 		},
 		set(key, value) {
-			try { window.localStorage.setItem(key, value); } catch (err) { /* ignore */ }
+			try {
+				window.localStorage.setItem(key, value);
+			} catch (err) {
+				// Ignore storage errors
+			}
 		}
 	};
+
 	const applyTheme = (theme) => {
 		const isLight = theme === 'light';
 		if (isLight) {
@@ -64,8 +83,12 @@
 			themeToggle.setAttribute('aria-label', isLight ? 'Toggle dark mode' : 'Toggle light mode');
 		}
 	};
+
+	// Initialize theme
 	const initialTheme = safeLocalStorage.get(THEME_KEY) || (mediaQuery.matches ? 'light' : 'dark');
 	applyTheme(initialTheme);
+
+	// Theme toggle click handler
 	if (themeToggle) {
 		themeToggle.addEventListener('click', () => {
 			const current = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
@@ -73,11 +96,14 @@
 			safeLocalStorage.set(THEME_KEY, current);
 		});
 	}
+
+	// Listen for system theme changes
 	mediaQuery.addEventListener('change', (event) => {
 		if (safeLocalStorage.get(THEME_KEY)) return;
 		applyTheme(event.matches ? 'light' : 'dark');
 	});
 
+	// ===== SVG Icons =====
 	const ICONS = {
 		github: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.42c.58.11.79-.25.79-.56v-2c-3.23.7-3.91-1.52-3.91-1.52-.53-1.36-1.3-1.72-1.3-1.72-1.06-.73.08-.72.08-.72 1.18.08 1.8 1.21 1.8 1.21 1.04 1.79 2.73 1.27 3.4.97.1-.77.41-1.28.75-1.57-2.58-.29-5.29-1.3-5.29-5.78 0-1.28.46-2.33 1.21-3.15-.12-.3-.53-1.5.12-3.12 0 0 .99-.32 3.26 1.2a11.2 11.2 0 0 1 5.94 0c2.27-1.52 3.26-1.2 3.26-1.2.65 1.62.24 2.82.12 3.12.75.82 1.21 1.87 1.21 3.15 0 4.5-2.72 5.48-5.31 5.77.43.37.81 1.1.81 2.22v3.29c0 .31.2.68.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>',
 		linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 8.96h3.96V21H3V8.96Zm6.74 0h3.78v1.65h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.15V21h-3.96v-5.58c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95V21H9.74V8.96Z"/></svg>',
@@ -130,6 +156,7 @@
 		}
 	};
 
+	// ===== Content Population =====
 	const data = window.SITE_CONTENT;
 	if (!data) return;
 
@@ -140,35 +167,41 @@
 		}
 	};
 
-const setImage = (id, media, fallbackAlt = '') => {
-	const slot = document.getElementById(id);
-	if (!slot) return;
-	slot.innerHTML = '';
-	slot.classList.remove('has-image');
-	if (!media) return;
-	const file = typeof media === 'string' ? media : media.file;
-	if (!file) return;
-	const isAbsolute = /^(?:https?:)?\/\//i.test(file) || file.startsWith('.') || file.startsWith('assets/');
-	const src = isAbsolute ? file : `assets/images/${file}`;
-	const alt = typeof media === 'object' && media.alt ? media.alt : fallbackAlt;
-	const img = document.createElement('img');
-	img.src = src;
-	img.alt = alt || '';
-	slot.appendChild(img);
-	slot.classList.add('has-image');
-	if (typeof media === 'object' && media.caption) {
-		const caption = document.createElement('figcaption');
-		caption.textContent = media.caption;
-		slot.appendChild(caption);
-	}
-};
+	const setImage = (id, media, fallbackAlt = '') => {
+		const slot = document.getElementById(id);
+		if (!slot) return;
+		slot.innerHTML = '';
+		slot.classList.remove('has-image');
+		if (!media) return;
+		
+		const file = typeof media === 'string' ? media : media.file;
+		if (!file) return;
+		
+		const isAbsolute = /^(?:https?:)?\/\//i.test(file) || file.startsWith('.') || file.startsWith('assets/');
+		const src = isAbsolute ? file : `assets/images/${file}`;
+		const alt = typeof media === 'object' && media.alt ? media.alt : fallbackAlt;
+		
+		const img = document.createElement('img');
+		img.src = src;
+		img.alt = alt || '';
+		slot.appendChild(img);
+		slot.classList.add('has-image');
+		
+		if (typeof media === 'object' && media.caption) {
+			const caption = document.createElement('figcaption');
+			caption.textContent = media.caption;
+			slot.appendChild(caption);
+		}
+	};
 
+	// ===== Populate Profile =====
 	if (data.profile) {
 		const name = data.profile.name || 'Your Name';
-		setText('#hero-title', `Hi, I’m ${name}`);
+		setText('#hero-title', `Hi, I'm ${name}`);
 		setText('#hero-lead', data.profile.tagline || '');
-	setText('#profile-intro', data.profile.intro || '');
-	setImage('profile-media', data.media?.profile, `${name} portrait`);
+		setText('#profile-intro', data.profile.intro || '');
+		setImage('profile-media', data.media?.profile, `${name} portrait`);
+
 		const factsEl = document.getElementById('key-facts');
 		if (factsEl) {
 			factsEl.innerHTML = '';
@@ -204,6 +237,7 @@ const setImage = (id, media, fallbackAlt = '') => {
 			emailEl.textContent = data.profile.email;
 			emailEl.href = `mailto:${data.profile.email}`;
 		}
+
 		const contactSocials = document.getElementById('contact-socials');
 		if (contactSocials) {
 			const links = data.profile.contactLinks?.length ? data.profile.contactLinks : data.profile.socials;
@@ -219,9 +253,10 @@ const setImage = (id, media, fallbackAlt = '') => {
 		}
 	}
 
+	// ===== Populate Education =====
 	const eduEl = document.getElementById('education-timeline');
 	if (eduEl) {
-	setImage('education-media', data.media?.education, 'Education highlight');
+		setImage('education-media', data.media?.education, 'Education highlight');
 		eduEl.innerHTML = '';
 		if (Array.isArray(data.education) && data.education.length) {
 			data.education.forEach((item) => {
@@ -240,6 +275,7 @@ const setImage = (id, media, fallbackAlt = '') => {
 		toggleSectionVisibility(eduEl, Array.isArray(data.education) && data.education.length);
 	}
 
+	// ===== Render Tag Group =====
 	const renderTagGroup = (container, tags) => {
 		if (!container) return;
 		if (!Array.isArray(tags) || !tags.length) {
@@ -254,9 +290,10 @@ const setImage = (id, media, fallbackAlt = '') => {
 		});
 	};
 
+	// ===== Populate Research =====
 	const researchEl = document.getElementById('research-grid');
 	if (researchEl) {
-	setImage('research-media', data.media?.research, 'Research spotlight');
+		setImage('research-media', data.media?.research, 'Research spotlight');
 		researchEl.innerHTML = '';
 		if (Array.isArray(data.research) && data.research.length) {
 			data.research.forEach((proj) => {
@@ -276,11 +313,10 @@ const setImage = (id, media, fallbackAlt = '') => {
 		toggleSectionVisibility(researchEl, Array.isArray(data.research) && data.research.length);
 	}
 
-	
-
+	// ===== Populate Projects =====
 	const projectsEl = document.getElementById('projects-grid');
 	if (projectsEl) {
-	setImage('projects-media', data.media?.projects, 'Projects showcase');
+		setImage('projects-media', data.media?.projects, 'Projects showcase');
 		projectsEl.innerHTML = '';
 		if (Array.isArray(data.projects) && data.projects.length) {
 			data.projects.forEach((proj) => {
@@ -293,6 +329,7 @@ const setImage = (id, media, fallbackAlt = '') => {
 					<div class="meta-links"></div>
 				`;
 				projectsEl.appendChild(card);
+				
 				const metaList = card.querySelector('.meta');
 				if (metaList && Array.isArray(proj.meta)) {
 					metaList.innerHTML = '';
@@ -310,9 +347,10 @@ const setImage = (id, media, fallbackAlt = '') => {
 		toggleSectionVisibility(projectsEl, Array.isArray(data.projects) && data.projects.length);
 	}
 
+	// ===== Populate Interests =====
 	const interestsEl = document.getElementById('interests-chips');
 	if (interestsEl) {
-	setImage('interests-media', data.media?.interests, 'Interest collage');
+		setImage('interests-media', data.media?.interests, 'Interest collage');
 		interestsEl.innerHTML = '';
 		if (Array.isArray(data.interests) && data.interests.length) {
 			data.interests.forEach((interest) => {
@@ -325,9 +363,10 @@ const setImage = (id, media, fallbackAlt = '') => {
 		toggleSectionVisibility(interestsEl, Array.isArray(data.interests) && data.interests.length);
 	}
 
+	// ===== Populate Achievements =====
 	const achievementsEl = document.getElementById('achievements-list');
 	if (achievementsEl) {
-	setImage('achievements-media', data.media?.achievements, 'Achievement highlight');
+		setImage('achievements-media', data.media?.achievements, 'Achievement highlight');
 		achievementsEl.innerHTML = '';
 		if (Array.isArray(data.achievements) && data.achievements.length) {
 			data.achievements.forEach((item) => {
@@ -345,9 +384,10 @@ const setImage = (id, media, fallbackAlt = '') => {
 		toggleSectionVisibility(achievementsEl, Array.isArray(data.achievements) && data.achievements.length);
 	}
 
+	// ===== Populate Posters =====
 	const postersEl = document.getElementById('posters-list');
 	if (postersEl) {
-	setImage('posters-media', data.media?.posters, 'Poster or publication visual');
+		setImage('posters-media', data.media?.posters, 'Poster or publication visual');
 		postersEl.innerHTML = '';
 		if (Array.isArray(data.posters) && data.posters.length) {
 			data.posters.forEach((poster) => {
@@ -367,32 +407,33 @@ const setImage = (id, media, fallbackAlt = '') => {
 		toggleSectionVisibility(postersEl, Array.isArray(data.posters) && data.posters.length);
 	}
 
+	// ===== Populate Engagements =====
 	const engagementsEl = document.getElementById('engagements-timeline');
 	if (engagementsEl) {
-	setImage('engagements-media', data.media?.engagements, 'Academic engagement visual');
+		setImage('engagements-media', data.media?.engagements, 'Academic engagement visual');
 		engagementsEl.innerHTML = '';
 		if (Array.isArray(data.engagements) && data.engagements.length) {
 			data.engagements.forEach((item) => {
 				const art = document.createElement('article');
 				art.className = 'timeline-item';
-				const meta = [item.organization, item.period].filter(Boolean).join(' • ');
+				const meta = [item.organization, item.period || item.year].filter(Boolean).join(' • ');
 				art.innerHTML = `
 					<div class="ti-header">
 						<h3>${item.role || ''}</h3>
 						<span class="ti-meta">${meta}</span>
 					</div>
-					<p>${item.description || ''}</p>
+					${item.description ? `<p>${item.description}</p>` : ''}
 				`;
 				engagementsEl.appendChild(art);
 			});
 		}
 		toggleSectionVisibility(engagementsEl, Array.isArray(data.engagements) && data.engagements.length);
 	}
-	
 
+	// ===== Populate Skills =====
 	const skillsEl = document.getElementById('skills-groups');
 	if (skillsEl) {
-	setImage('skills-media', data.media?.skills, 'Skills visual');
+		setImage('skills-media', data.media?.skills, 'Skills visual');
 		skillsEl.innerHTML = '';
 		if (Array.isArray(data.skills) && data.skills.length) {
 			data.skills.forEach((group) => {
@@ -416,9 +457,10 @@ const setImage = (id, media, fallbackAlt = '') => {
 		toggleSectionVisibility(skillsEl, Array.isArray(data.skills) && data.skills.length);
 	}
 
+	// ===== Populate Languages =====
 	const languagesEl = document.getElementById('languages-list');
 	if (languagesEl) {
-	setImage('languages-media', data.media?.languages, 'Languages visual');
+		setImage('languages-media', data.media?.languages, 'Languages visual');
 		languagesEl.innerHTML = '';
 		if (Array.isArray(data.languages) && data.languages.length) {
 			data.languages.forEach((lang) => {
@@ -432,9 +474,10 @@ const setImage = (id, media, fallbackAlt = '') => {
 		toggleSectionVisibility(languagesEl, Array.isArray(data.languages) && data.languages.length);
 	}
 
+	// ===== Populate Internships =====
 	const internshipsEl = document.getElementById('internships-list');
 	if (internshipsEl) {
-	setImage('internships-media', data.media?.internships, 'Internship highlight');
+		setImage('internships-media', data.media?.internships, 'Internship highlight');
 		internshipsEl.innerHTML = '';
 		if (Array.isArray(data.internships) && data.internships.length) {
 			data.internships.forEach((internship) => {
@@ -454,9 +497,10 @@ const setImage = (id, media, fallbackAlt = '') => {
 		toggleSectionVisibility(internshipsEl, Array.isArray(data.internships) && data.internships.length);
 	}
 
+	// ===== Populate Certifications =====
 	const certificationsEl = document.getElementById('certifications-list');
 	if (certificationsEl) {
-	setImage('certifications-media', data.media?.certifications, 'Certification visual');
+		setImage('certifications-media', data.media?.certifications, 'Certification visual');
 		certificationsEl.innerHTML = '';
 		if (Array.isArray(data.certifications) && data.certifications.length) {
 			data.certifications.forEach((cert) => {
@@ -477,8 +521,9 @@ const setImage = (id, media, fallbackAlt = '') => {
 		toggleSectionVisibility(certificationsEl, Array.isArray(data.certifications) && data.certifications.length);
 	}
 
-setImage('contact-media', data.media?.contact, 'Contact visual');
+	setImage('contact-media', data.media?.contact, 'Contact visual');
 
+	// ===== Active Navigation =====
 	const navLinks = Array.from(document.querySelectorAll('.site-nav a[href^="#"]'));
 	if (navLinks.length) {
 		const sectionObserver = new IntersectionObserver((entries) => {
@@ -499,6 +544,7 @@ setImage('contact-media', data.media?.contact, 'Contact visual');
 		});
 	}
 
+	// ===== Reveal Animation =====
 	const revealObserver = new IntersectionObserver((entries, observer) => {
 		entries.forEach((entry) => {
 			if (!entry.isIntersecting) return;
@@ -515,5 +561,3 @@ setImage('contact-media', data.media?.contact, 'Contact visual');
 		revealObserver.observe(el);
 	});
 })();
-
-
