@@ -242,6 +242,10 @@ window.SITE_CONTENT = {
 		{
 			name: "Tamil",
 			proficiency: "Native"
+		},
+		{
+			name: "French",
+			proficiency: "Basic - Secondary language in Higher Secondary"
 		}
 	],
 
