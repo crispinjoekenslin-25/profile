@@ -254,7 +254,7 @@ window.SITE_CONTENT = {
 			role: "National Center for Biological Sciences (NCBS)",
 			company: "Dec 2025 - Jan 2026",
 			period: "Bangalore",
-			description: "Internship in Bioinformatics"
+			description: "Internship in Bioinformatics - Development of pipeline using Python and R"
 		}
 	],
 
